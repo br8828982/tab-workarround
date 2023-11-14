@@ -33,30 +33,36 @@
     </div>
 
     <script>
-        document.addEventListener('click', (e) => {
-            const trigger = e.target.closest(".trigger")
+        const fade = (activeTab, tab) => {
+            activeTab?.classList.remove("open");
+
+            const handleTransitionEnd = () => {
+                activeTab.classList.remove("active");
+                tab.classList.add("active");
+                tab.clientHeight;
+                tab.classList.add("open");
+            };
+
+            activeTab?.addEventListener('transitionend', handleTransitionEnd, { once: true });
+        }
+
+        const handleClick = (event) => {
+            const trigger = event.target.closest(".trigger");
             if (!trigger) return;
 
             const btnAtr = trigger.getAttribute("data-target");
-            const element = document.getElementById(btnAtr);
+            const tab = document.getElementById(btnAtr);
 
-            if (!element) return;
+            if (!tab) return;
 
             const activeTab = document.querySelector(".tab.active.open");
 
             if (activeTab && activeTab.id === btnAtr) return;
 
-            activeTab?.classList.remove("open");
+            fade(activeTab, tab);
+        };
 
-            const transitionEndHandler = () => {
-                activeTab.classList.remove("active");
-                element.classList.add("active");
-                element.clientHeight;
-                element.classList.add("open");
-            };
-
-            activeTab?.addEventListener('transitionend', transitionEndHandler, { once: true });
-        });
+        document.body.addEventListener("click", handleClick);
     </script>
 </body>
 </html>
