@@ -53,11 +53,9 @@
                 element.classList.add("active");
                 element.clientHeight;
                 element.classList.add("open");
-
-                activeTab.removeEventListener('transitionend', transitionEndHandler);
             };
 
-            activeTab?.addEventListener('transitionend', transitionEndHandler);
+            activeTab?.addEventListener('transitionend', transitionEndHandler, { once: true });
         });
     </script>
 </body>
