@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab {
+            display: none;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all .3s;
+        }
+
+        .tab.active {
+            display: block;
+        }
+
+        .tab.open {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="trigger" data-target="tab1">Tab 1</button>
+        <button class="trigger" data-target="tab2">Tab 2</button>
+    </div>
+    <div class="container">
+        <div id="tab1" class="tab open active">Content 1</div>
+        <div id="tab2" class="tab">Content 2</div>
+    </div>
+
+    <script>
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest(".trigger")
+            if (!trigger) return;
+
+            const btnAtr = trigger.getAttribute("data-target");
+            const element = document.getElementById(btnAtr);
+
+            if (!element) return;
+
+            const activeTab = document.querySelector(".tab.active.open");
+
+            if (activeTab && activeTab.id === btnAtr) return;
+
+            activeTab?.classList.remove("open");
+
+            const transitionEndHandler = () => {
+                activeTab.classList.remove("active");
+                element.classList.add("active");
+                element.clientHeight;
+                element.classList.add("open");
+
+                activeTab.removeEventListener('transitionend', transitionEndHandler);
+            };
+
+            activeTab?.addEventListener('transitionend', transitionEndHandler);
+        });
+    </script>
+</body>
+</html>
