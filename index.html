@@ -5,59 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .tab {
+        .tab-body {
             display: none;
             opacity: 0;
             transform: translateY(5px);
             transition: all .3s;
         }
 
-        .tab.active {
+        .tab-body.active {
             display: block;
         }
 
-        .tab.open {
+        .tab-body.fade {
             transform: translateY(0);
             opacity: 1;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <button class="trigger" data-target="tab1">Tab 1</button>
-        <button class="trigger" data-target="tab2">Tab 2</button>
+    <div class="tab-lists">
+        <button class="tab-header" data-target="tab1">Tab 1</button>
+        <button class="tab-header" data-target="tab2">Tab 2</button>
     </div>
-    <div class="container">
-        <div id="tab1" class="tab open active">Content 1</div>
-        <div id="tab2" class="tab">Content 2</div>
+    <div class="tab-items">
+        <div id="tab1" class="tab-body fade active">Content 1</div>
+        <div id="tab2" class="tab-body">Content 2</div>
     </div>
 
     <script>
         const fade = (activeTab, tab) => {
-            activeTab?.classList.remove("open");
+            activeTab?.classList.remove("fade");
 
             const handleTransitionEnd = () => {
                 activeTab.classList.remove("active");
                 tab.classList.add("active");
                 tab.clientHeight;
-                tab.classList.add("open");
+                tab.classList.add("fade");
             };
 
             activeTab?.addEventListener('transitionend', handleTransitionEnd, { once: true });
         }
 
         const handleClick = (event) => {
-            const trigger = event.target.closest(".trigger");
+            const trigger = event.target.closest(".tab-header");
             if (!trigger) return;
 
             const btnAtr = trigger.getAttribute("data-target");
             const tab = document.getElementById(btnAtr);
 
-            if (!tab) return;
+            if (!tab || tab.classList.contains("active")) return;
 
-            const activeTab = document.querySelector(".tab.active.open");
-
-            if (activeTab && activeTab.id === btnAtr) return;
+            const activeTab = document.querySelector(".tab-body.active");
 
             fade(activeTab, tab);
         };
