@@ -5,58 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .tab {
+        .tab-body {
             display: none;
             opacity: 0;
             transform: translateY(5px);
             transition: all .3s;
         }
 
-        .tab.active {
-            display: block;
-        }
-
-        .tab.open {
-            transform: translateY(0);
+        .tab-body.open {
+            display: flex;
             opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <button class="trigger" data-target="tab1">Tab 1</button>
-        <button class="trigger" data-target="tab2">Tab 2</button>
+    <div class="tab-lists">
+        <button class="tab-header" data-target="tab1">Tab 1</button>
+        <button class="tab-header" data-target="tab2">Tab 2</button>
     </div>
-    <div class="container">
-        <div id="tab1" class="tab open active">Content 1</div>
-        <div id="tab2" class="tab">Content 2</div>
+    <div class="tab-items">
+        <div id="tab1" class="tab-body open">Content 1</div>
+        <div id="tab2" class="tab-body">Content 2</div>
     </div>
 
     <script>
-        document.addEventListener('click', (e) => {
-            const trigger = e.target.closest(".trigger")
+        const fade = (element, open) => {
+          element.style.display = "flex";
+  
+          element.offsetHeight;
+  
+          const removeStyle = () => element.removeAttribute('style');
+  
+          element.addEventListener('transitionend', removeStyle);
+  
+          element.classList.toggle('open', open);
+        };
+
+        const handleClick = (event) => {
+            const trigger = event.target.closest(".tab-header");
             if (!trigger) return;
 
             const btnAtr = trigger.getAttribute("data-target");
-            const element = document.getElementById(btnAtr);
+            const selectedtab = document.getElementById(btnAtr);
+            const activeTab = document.querySelector(".tab-body.open");
 
-            if (!element) return;
+            if (!selectedtab || selectedtab.classList.contains("open") || !activeTab) return;
 
-            const activeTab = document.querySelector(".tab.active.open");
+            fade(activeTab, false);
 
-            if (activeTab && activeTab.id === btnAtr) return;
+            activeTab.addEventListener('transitionend', () => fade(selectedtab, true),{once: true})
+        };
 
-            activeTab?.classList.remove("open");
-
-            const transitionEndHandler = () => {
-                activeTab.classList.remove("active");
-                element.classList.add("active");
-                element.clientHeight;
-                element.classList.add("open");
-            };
-
-            activeTab?.addEventListener('transitionend', transitionEndHandler, { once: true });
-        });
+        document.body.addEventListener("click", handleClick);
     </script>
 </body>
 </html>
