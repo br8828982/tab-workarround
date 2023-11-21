@@ -13,13 +13,13 @@ A simple tab component for creating tabbed content with smooth transitions.
 
    ```html
    <div class="tab-lists">
-    <button class="tab-header" data-target="tab1">Tab 1</button>
-    <button class="tab-header" data-target="tab2">Tab 2</button>
-</div>
-<div class="tab-items">
-    <div id="tab1" class="tab-body open">Content 1</div>
-    <div id="tab2" class="tab-body">Content 2</div>
-</div>
+        <button class="tab-header" data-target="tab1">Tab 1</button>
+        <button class="tab-header" data-target="tab2">Tab 2</button>
+    </div>
+    <div class="tab-items">
+        <div id="tab1" class="tab-body open">Content 1</div>
+        <div id="tab2" class="tab-body">Content 2</div>
+    </div>
    
 2. **CSS Styles:**
 
@@ -86,7 +86,8 @@ document.body.addEventListener("click", handleClick);
 
 **HTML Structure:**
 
-- Create tab headers using <button> elements with the class tab-header.
+- Create tab headers using `<button>` elements with the class `tab-header`.
+- Set the `data-target` attribute to link a button to a specific tab.
 
 **Styling:**
 
