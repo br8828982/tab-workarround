@@ -45,42 +45,42 @@ A simple tab component for creating tabbed content with smooth transitions.
 
    ```javascript
    // Function to toggle tab visibility
-const fade = (element, open) => {
-    element.style.display = "flex";
+        const fade = (element, open) => {
+            element.style.display = "flex";
 
-    element.offsetHeight;
+            element.offsetHeight;
 
-    const removeStyle = () => element.removeAttribute('style');
+            const removeStyle = () => element.removeAttribute('style');
 
-    element.addEventListener('transitionend', removeStyle);
+            element.addEventListener('transitionend', removeStyle);
 
-    element.classList.toggle('open', open);
-};
+            element.classList.toggle('open', open);
+        };
 
-// Handle click event on tab headers
-const handleClick = (event) => {
-    const trigger = event.target.closest(".tab-header");
-    if (!trigger) return;
+        // Handle click event on tab headers
+        const handleClick = (event) => {
+            const trigger = event.target.closest(".tab-header");
+            if (!trigger) return;
 
-    const selectedTabId = trigger.getAttribute("data-target");
-    const selectedTab = document.getElementById(selectedTabId);
-    const activeTab = document.querySelector(".tab-body.open");
+            const selectedTabId = trigger.getAttribute("data-target");
+            const selectedTab = document.getElementById(selectedTabId);
+            const activeTab = document.querySelector(".tab-body.open");
 
-    if (!selectedTab || !activeTab || selectedTab === activeTab) {
-        return;
-    }
+            if (!selectedTab || !activeTab || selectedTab === activeTab) {
+                return;
+            }
 
-    // Hide the active tab.
-    fade(activeTab, false);
+            // Hide the active tab.
+            fade(activeTab, false);
 
-    // Show the selected tab after transitionend of active tab
-    activeTab.addEventListener('transitionend', () => {
-        fade(selectedTab, true);
-    }, { once: true });
-};
+            // Show the selected tab after transitionend of active tab
+            activeTab.addEventListener('transitionend', () => {
+                fade(selectedTab, true);
+            }, { once: true });
+        };
 
-// Event delegation
-document.body.addEventListener("click", handleClick);
+        // Event delegation
+        document.body.addEventListener("click", handleClick);
    
 ## Customization
 
