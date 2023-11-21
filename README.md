@@ -44,7 +44,7 @@ A simple tab component for creating tabbed content with smooth transitions.
    The JavaScript code handles the tab functionality with a fade effect. It utilizes event delegation for efficient handling of clicks.
 
    ```javascript
-   // Function to toggle tab visibility
+      // Function to toggle tab visibility
         const fade = (element, open) => {
             element.style.display = "flex";
 
