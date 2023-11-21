@@ -27,17 +27,17 @@ A simple tab component for creating tabbed content with smooth transitions.
     
    ```css
    .tab-body {
-            display: none;
-            opacity: 0;
-            transform: translateY(5px);
-            transition: all .3s;
-        }
+       display: none;
+       opacity: 0;
+       transform: translateY(5px);
+       transition: all .3s;
+   }
 
-        .tab-body.open {
-            display: flex;
-            opacity: 1;
-            transform: translateY(0);
-        }
+   .tab-body.open {
+       display: flex;
+       opacity: 1;
+       transform: translateY(0);
+   }
 
 3. **JavaScript:**
 
